@@ -1061,11 +1061,11 @@
         "Package": "fmesher",
         "Type": "Package",
         "Title": "Triangle Meshes and Related Geometry Tools",
-        "Version": "0.8.0.9004",
+        "Version": "0.8.0",
         "Authors@R": "c(\n  person(\"Finn\", \"Lindgren\", email = \"finn.lindgren@gmail.com\",\n         role = c(\"aut\", \"cre\", \"cph\"),\n         comment = c(ORCID = \"0000-0002-5833-2011\",\n                     \"Finn Lindgren wrote the main code\")),\n  person(\"Seaton\", \"Andy\", email = \"andy.e.seaton@gmail.com\",\n         role = c(\"ctb\"),\n         comment = \"Andy Seaton constributed features to the sf support\"),\n  person(\"Suen\", \"Man Ho\", email = \"M.H.Suen@sms.ed.ac.uk\", role = c(\"ctb\"),\n         comment = \"Man Ho Suen contributed features and code structure design for the integration methods\"),\n  person(\"Fabian E.\", \"Bachl\", email = \"bachlfab@gmail.com\",\n         role = c(\"ctb\"),\n         comment = \"Fabian Bachl co-developed precursors of fm_pixels and fm_split_lines in inlabru\")\n  )",
-        "Description": "Generate planar and spherical triangle meshes, compute\n        finite element calculations for 1-, 2-, and 3-dimensional flat\n        and curved manifolds with associated basis function spaces,\n        methods for lines and polygons, and transparent handling of\n        coordinate reference systems and coordinate transformation,\n        including 'sf' and 'sp' geometries. The core 'fmesher' library\n        code was originally part of the 'INLA' package, and implements\n        parts of \"Triangulations and Applications\" by Hjelle and\n        Daehlen (2006) <doi:10.1007/3-540-33261-8>.",
-        "Depends": "R (>= 4.1.0)",
-        "Imports": "dplyr, graphics, grDevices, lifecycle, Matrix, methods, Rcpp,\nrlang, sf, splancs, stats, tibble, utils, withr",
+        "Description": "Generate planar and spherical triangle meshes,\n    compute finite element calculations for 1-, 2-, and 3-dimensional flat\n    and curved manifolds with associated basis function spaces, methods for\n    lines and polygons, and transparent handling of coordinate reference\n    systems and coordinate transformation, including 'sf' and 'sp' geometries.\n    The core 'fmesher' library code was originally part of the 'INLA' package,\n    and implements parts of \"Triangulations and Applications\" by\n    Hjelle and Daehlen (2006) <doi:10.1007/3-540-33261-8>.",
+        "Depends": "R (>= 4.1.0), methods",
+        "Imports": "dplyr, graphics, grDevices, lifecycle, Matrix, Rcpp, rlang,\nsf, splancs, stats, tibble, utils, withr",
         "Suggests": "geometry, ggplot2, knitr, patchwork, testthat (>= 3.0.0),\nterra, tidyterra, rgl, rmarkdown, sp (>= 1.6-1)",
         "URL": "https://inlabru-org.github.io/fmesher/,\nhttps://github.com/inlabru-org/fmesher",
         "BugReports": "https://github.com/inlabru-org/fmesher/issues",
@@ -1073,7 +1073,6 @@
         "Copyright": "2010-2026 Finn Lindgren, except src/predicates.cc by\nJonathan Richard Shewchuk, 1996",
         "NeedsCompilation": "yes",
         "Encoding": "UTF-8",
-        "Roxygen": "list(markdown = TRUE)",
         "Config/testthat/edition": "3",
         "Config/testthat/parallel": "true",
         "SystemRequirements": "C++17",
@@ -1082,18 +1081,19 @@
         "BuildVignettes": "true",
         "Collate": "'RcppExports.R' 'deprecated.R' 'bary.R' 'basis.R' 'bbox.R'\n'collect.R' 'components.R' 'print.R' 'crs.R' 'data-fmexample.R'\n'data-fmexample3d.R' 'diameter.R' 'evaluator.R' 'fem.R' 'fm.R'\n'fmesher-package.R' 'fmesher.R' 'ggplot.R' 'integration.R'\n'lattice_2d.R' 'lattice_Nd.R' 'list.R' 'local.R' 'manifold.R'\n'mapping.R' 'matern.R' 'mesh.R' 'mesh_1d.R' 'mesh_2d.R'\n'mesh_3d.R' 'mesh_assessment.R' 'nonconvex_hull.R' 'onload.R'\n'plot.R' 'segm.R' 'sf_mesh.R' 'sf_utils.R' 'simplify.R'\n'sp_mesh.R' 'split_lines.R' 'tensor.R' 'utils.R'",
         "LazyData": "true",
-        "Config/roxygen2/version": "8.1.0",
-        "Config/pak/sysreqs": "libabsl-dev cmake libgdal-dev gdal-bin libgeos-dev\nlibssl-dev libproj-dev libsqlite3-dev libudunits2-dev",
-        "Repository": "https://inlabru-org.r-universe.dev",
-        "Date/Publication": "2026-09-29 14:47:31 UTC",
-        "RemoteUrl": "https://github.com/inlabru-org/fmesher",
-        "RemoteRef": "HEAD",
-        "RemoteSha": "d3f8849872e442e4236813ba71ffb6a6eefa1851",
-        "Packaged": "2026-09-29 16:15:45 UTC; root",
+        "Config/roxygen2/version": "8.0.0",
+        "Packaged": "2026-06-23 16:14:34 UTC; flindgre",
         "Author": "Finn Lindgren [aut, cre, cph] (ORCID:\n    <https://orcid.org/0000-0002-5833-2011>, Finn Lindgren wrote the\n    main code),\n  Seaton Andy [ctb] (Andy Seaton constributed features to the sf support),\n  Suen Man Ho [ctb] (Man Ho Suen contributed features and code structure\n    design for the integration methods),\n  Fabian E. Bachl [ctb] (Fabian Bachl co-developed precursors of\n    fm_pixels and fm_split_lines in inlabru)",
         "Maintainer": "Finn Lindgren <finn.lindgren@gmail.com>",
-        "Built": "R 4.6.1; x86_64-w64-mingw32; 2026-09-29 16:19:08 UTC; windows",
-        "Archs": "x64"
+        "Repository": "CRAN",
+        "Date/Publication": "2026-06-23 17:10:11 UTC",
+        "Built": "R 4.6.1; x86_64-w64-mingw32; 2026-09-29 14:40:38 UTC; windows",
+        "Archs": "x64",
+        "RemoteType": "standard",
+        "RemotePkgRef": "fmesher",
+        "RemoteRef": "fmesher",
+        "RemoteRepos": "https://cloud.r-project.org",
+        "RemoteSha.Version": "0.8.0"
       }
     },
     "fontawesome": {
@@ -3820,7 +3820,7 @@
       "checksum": "e25c789c026484569430cb129a4f8378"
     },
     "App.R": {
-      "checksum": "e08bad4e9af37507020045d29c48afe5"
+      "checksum": "16a4f89e75dfeedbc18b2f2a7e3983bc"
     },
     "App/App.R": {
       "checksum": "739a54c824494052eebfe88889d89d8e"
