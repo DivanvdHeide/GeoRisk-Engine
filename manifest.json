@@ -80,8 +80,8 @@
       }
     },
     "INLA": {
-      "Source": "https://inla.r-inla-download.org/R/stable",
-      "Repository": null,
+      "Source": "INLA",
+      "Repository": "https://inla.r-inla-download.org/R/stable",
       "description": {
         "Package": "INLA",
         "Type": "Package",
@@ -3820,7 +3820,7 @@
       "checksum": "e25c789c026484569430cb129a4f8378"
     },
     "App.R": {
-      "checksum": "16a4f89e75dfeedbc18b2f2a7e3983bc"
+      "checksum": "41845746870a15b794e86c61a489fe76"
     },
     "App/App.R": {
       "checksum": "739a54c824494052eebfe88889d89d8e"
