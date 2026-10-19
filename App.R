@@ -5,7 +5,7 @@
 #  INLA = "https://inla.r-inla-download.org/R/stable",
 #  CRAN = "https://cran.rstudio.com/"
 #))
-
+#install.packages("INLA",dep=TRUE)
 
 library(shiny)
 library(bslib)
@@ -28,7 +28,7 @@ library(scales)
 library(raster)
 library(jsonlite)
 
-#rsconnect::writeManifest()
+#writeManifest()
 
 # =====================================================================================
 # 2. CUSTOM CSS
@@ -257,6 +257,22 @@ ui <- page_navbar(
       
       p(
         "Co-Supervisors: Prof. Janet van Niekerk, Prof. Inger Fabris-Rotelli.",
+      ),
+      
+      column(
+        width = 3,
+        
+        tags$img(
+          src = "up_emblem.jpg",
+          alt = "University of Pretoria emblem",
+          style = paste(
+            "max-width: 160px;",
+            "width: 100%;",
+            "height: auto;",
+            "display: block;",
+            "margin: 10px auto;"
+          )
+        )
       )
     ),
     
@@ -413,6 +429,30 @@ ui <- page_navbar(
           "overview_map",
           height = "500px"
         )
+      )
+    ),
+    
+    br(),
+    
+    div(
+      class = "plot-card",
+      
+      h3(
+        "Research Paper",
+        class = "section-head"
+      ),
+      
+      p(
+        "Access the full research report for additional details
+    on the methodology, spatial models, and results."
+      ),
+      
+      tags$a(
+        href = "https://drive.google.com/drive/folders/1ZdKxbJL_WJF1e_i6P66eEdVLG_LfVLjK?usp=drive_link",
+        target = "_blank",
+        class = "btn btn-primary",
+        role = "button",
+        "View Research Paper"
       )
     )
     
@@ -1666,7 +1706,7 @@ server <- function(input, output, session) {
         ),
         
         p(
-          "The logarithm ensures that the predicted claim intensity
+          "The logarithm ensures that the predicted claim frequency
          remains positive."
         )
         
@@ -1708,7 +1748,7 @@ server <- function(input, output, session) {
             ),
             
             tags$li(
-              tags$b("Severity: "),
+              tags$b("Frequency: "),
               "how expensive those claims are expected to be."
             )
             
@@ -1902,12 +1942,14 @@ server <- function(input, output, session) {
     dat <- dat %>%
       filter(!is.na(Year))
     
-    # When the combined precipitation worksheet is selected,
-    # show HAIL, FLOOD and STORM side-by-side in different colours.
-    if (identical(input$selected_sheet, "PRECIPITATION DATA") &&
-        "CAUSE" %in% names(dat)) {
+    # Check if CAUSE exists and contains more than 1 distinct non-NA precipitation type
+    has_multiple_causes <- "CAUSE" %in% names(dat) && 
+      length(unique(na.omit(dat$CAUSE))) > 1
+    
+    if (has_multiple_causes) {
       
       yearly_claims <- dat %>%
+        filter(!is.na(CAUSE)) %>%
         mutate(CAUSE = as.character(CAUSE)) %>%
         group_by(Year, CAUSE) %>%
         summarise(
@@ -1986,12 +2028,14 @@ server <- function(input, output, session) {
     dat <- dat %>%
       filter(!is.na(Year))
     
-    # When the combined precipitation worksheet is selected,
-    # show HAIL, FLOOD and STORM side-by-side in different colours.
-    if (identical(input$selected_sheet, "PRECIPITATION DATA") &&
-        "CAUSE" %in% names(dat)) {
+    # Check if CAUSE exists and contains more than 1 distinct non-NA precipitation type
+    has_multiple_causes <- "CAUSE" %in% names(dat) && 
+      length(unique(na.omit(dat$CAUSE))) > 1
+    
+    if (has_multiple_causes) {
       
       yearly_amount <- dat %>%
+        filter(!is.na(CAUSE)) %>%
         mutate(CAUSE = as.character(CAUSE)) %>%
         group_by(Year, CAUSE) %>%
         summarise(
@@ -2067,8 +2111,10 @@ server <- function(input, output, session) {
     
     req(nrow(dat) > 0)
     
-    if ("CAUSE" %in% names(dat) &&
-        all(c("HAIL", "FLOOD", "STORM") %in% unique(as.character(dat$CAUSE)))) {
+    has_multiple_causes <- "CAUSE" %in% names(dat) && 
+      length(unique(na.omit(dat$CAUSE))) > 1
+    
+    if (has_multiple_causes) {
       
       dat$CAUSE <- as.character(dat$CAUSE)
       pal <- colorFactor(
@@ -2077,7 +2123,7 @@ server <- function(input, output, session) {
           "FLOOD" = "forestgreen",
           "STORM" = "red"
         ),
-        domain = c("HAIL", "FLOOD", "STORM")
+        domain = unique(dat$CAUSE)
       )
       
       popup_text <- if ("CLAIM_NUMBER" %in% names(dat)) {
